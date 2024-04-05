@@ -2,14 +2,15 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import carRouter from "./routes/carRoutes.js";
+import router from './routes/carRoutes.js';
+import bodyParser from 'body-parser';
 
 const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Connection URI for MongoDB (replace <username>, <password>, <clustername>, <dbname> with your MongoDB credentials)
-const uri = "mongodb://localhost:27017/car_dealership?retryWrites=true&w=majority";
+
+const uri = "mongodb://127.0.0.1:27017/car_dealership?retryWrites=true&w=majority";
 
 mongoose
   .connect(uri)
@@ -26,7 +27,8 @@ mongoose
     res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
   });
 
-  app.use("/api/carListing/", carRouter);
+  app.use(bodyParser.json());
+  app.use("/api/car", router);
 
 
 
