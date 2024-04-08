@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import carRouter from './routes/carRoutes.js';
 import userRouter from './routes/userRouter.js';
+import contactRouter from './routes/contactRouter.js';
 import bodyParser from 'body-parser';
 
 const __dirname = path.resolve();
@@ -31,6 +32,7 @@ mongoose
   app.use(bodyParser.json());
   app.use("/api/car", carRouter);
   app.use("/api/user", userRouter);
+  app.use("/api/contact", contactRouter);
 
 
 
