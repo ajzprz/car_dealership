@@ -2,7 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import router from './routes/carRoutes.js';
+import carRouter from './routes/carRoutes.js';
+import userRouter from './routes/userRouter.js';
+import contactRouter from './routes/contactRouter.js';
 import bodyParser from 'body-parser';
 
 const __dirname = path.resolve();
@@ -22,13 +24,15 @@ mongoose
   });
 
 
-  app.use(express.static(path.join(__dirname, "/client/dist")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-  });
+  // app.use(express.static(path.join(__dirname, "/client/dist")));
+  // app.get("*", (req, res) => {
+  //   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+  // });
 
   app.use(bodyParser.json());
-  app.use("/api/car", router);
+  app.use("/api/car", carRouter);
+  app.use("/api/user", userRouter);
+  app.use("/api/contact", contactRouter);
 
 
 
